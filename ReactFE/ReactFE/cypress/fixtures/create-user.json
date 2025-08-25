@@ -1,0 +1,8 @@
+{
+  "firstname": "fixFN",
+  "lastname": "fixLN",
+  "email": "fixEmail@email.com",
+  "userPassword": "testPass123",
+  "country": "🇷🇴 Romania",
+  "birthday": "2000-01-01"
+}

@@ -1,0 +1,84 @@
+/// <reference types="cypress" />
+import axios from "axios";
+// Welcome to Cypress!
+//
+// This spec file contains a variety of sample tests
+// for a todo list app that are designed to demonstrate
+// the power of writing tests in Cypress.
+//
+// To learn more about how Cypress works and
+// what makes it such an awesome testing tool,
+// please read our getting started guide:
+// https://on.cypress.io/introduction-to-cypress
+
+describe("example to-do app", () => {
+  Cypress.Commands.add("visitWithoutTrailingSlash", (url) => {
+    if (url.endsWith("/")) {
+      url = url.slice(0, -1);
+    }
+    cy.visit(url);
+  });
+
+  const login = () => {
+    cy.window().then(async (win) => {
+      const data = {
+        email: "munteandiana101@gmail.com",
+        userPassword: "diana123",
+      };
+      const response = await axios.post(
+        "http://localhost:8081/user/login",
+        data,
+      );
+      await new Promise((resolve) => setTimeout(resolve, 650));
+      win.localStorage.setItem("userId", response.data.userId);
+      win.localStorage.setItem("jwt", response.data.jwt);
+      win.localStorage.setItem("isAdmin", response.data.isAdmin);
+      if (response.data.artist) {
+        localStorage.setItem("user-artist-id", response.data.artist.artistId);
+        localStorage.setItem("artist-flag", true);
+      } else {
+        localStorage.setItem("user-artist-id", null);
+        localStorage.setItem("artist-flag", false);
+      }
+      win.localStorage.setItem("route", "home");
+    });
+  };
+
+  beforeEach(() => {
+
+    login();
+
+    cy.visitWithoutTrailingSlash("http://localhost:5173");
+    cy.get("#navBarSongButton").click();
+  });
+
+
+
+  it("create song", () => {
+    cy.get("#addSongButton")
+      .click();
+    cy.get("#addSongPopUp").should("be.visible");
+    cy.get("#title").type("TEST TITLE");
+    cy.get("#alternativeTitle").type("TEST ALTERNATIVE TITLE");
+    cy.get("#duration").type(12);
+    cy.get("#creationDate").type("2000-12-12");
+    cy.get("#url").type("some url");
+
+    cy.get("#title").should("have.value", "TEST TITLE");
+    cy.get("#alternativeTitle").should("have.value", "TEST ALTERNATIVE TITLE");
+    cy.get("#duration").should("have.value", 12);
+    cy.get("#creationDate").should("have.value", "2000-12-12");
+    cy.get("#url").should("have.value", "some url");
+
+    cy.get("#songList")
+      .children()
+      .its("length")
+      .then((initialCount) => {
+        cy.get("#submitButton").click();
+        cy.get("#addSongPopUp").should("not.exist");
+        cy.get("#songList")
+          .children()
+          .should("have.length", initialCount + 1);
+      });
+  });
+});

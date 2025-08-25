@@ -1,0 +1,8 @@
+com\arobs\musify\services\SongServiceUnitTest.class
+com\arobs\musify\services\AlbumHappyFlowServiceUnitTest.class
+com\arobs\musify\services\FollowPlaylistUnitTest.class
+com\arobs\musify\services\PlaylistServiceUnitTest.class
+com\arobs\musify\MusifyApplicationTests.class
+com\arobs\musify\services\ArtistServiceUnitTest.class
+com\arobs\musify\services\AlbumFailFlowServiceUnitTest.class
+com\arobs\musify\services\SongsByAlbumServiceUnitTest.class
