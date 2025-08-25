@@ -1,5 +1,5 @@
-Music Streaming Platform
-
+**Music Streaming Platform
+**
 This project is a complete music streaming platform with a Java Spring Boot backend, a React frontend, and a Python chatbot.
 
 Key Features
