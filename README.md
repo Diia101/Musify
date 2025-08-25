@@ -5,7 +5,7 @@ This project is a complete music streaming platform with a Java Spring Boot back
 Key Features
 - User Authentication: Secure JWT-based registration, login, and password reset.
 - Content Management: Full CRUD operations for albums, artists, and songs.
-- Playlist Management: Users can create, edit, and follow playlists.
+- Playlist Management: Users can create, edit, share and follow playlists.
 - Interactive Chatbot: A Python-based chatbot using Flask and NLTK provides a conversational interface for user queries.
 - User Roles: Differentiated access for user and admin roles.
 - Testing: Includes JUnit tests for the backend and Cypress for end-to-end frontend testing.
